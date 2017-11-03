@@ -20,11 +20,12 @@ package org.eventum.sample;
 import org.eventum.core.EventConverter;
 import org.eventum.core.event.PersistEvent;
 import org.eventum.core.event.PersistEventStatus;
-import com.jd.eventum.jdbc.FastjsonObjectMapper;
 import org.eventum.sample.domain.Order;
 import org.eventum.sample.domain.OrderStatus;
 import org.eventum.sample.event.OrderCreatedEvent;
 import org.eventum.sample.event.PaymentEvent;
+import org.eventum.spring.AppConfig;
+import org.eventum.spring.FastjsonObjectMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +40,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes={AppConfig.class})
+@ContextConfiguration(classes={SampleConfig.class, AppConfig.class})
 public class OrderServiceIT {
 
     @Autowired

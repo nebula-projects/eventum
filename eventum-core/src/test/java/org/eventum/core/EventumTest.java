@@ -144,13 +144,13 @@ public class EventumTest {
 
         Eventum eventum = new Eventum(store, new FixedBackoffRetryPolicy(100, 1));
         eventum.registerEventHandler(mockEventHandler);
-        eventum.startsWith(new WorkerOptions().setMaster(true));
+        eventum.startsWith(new WorkerOptions());
 
         assertFalse(mockEventHandler.isProcessed());
 
         eventum.save(mockEvent);
 
-        sleep(4*1000);
+        sleep(5*1000);
         assertTrue(mockEventHandler.isProcessed());
 
     }

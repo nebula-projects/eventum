@@ -35,7 +35,7 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan({"org.eventum.sample", "org.eventum.sample.repository"})
 @MapperScan("org.eventum.sample.repository")
-public class AppConfig {
+public class SampleConfig {
 
     @Autowired
     private Eventum eventum;
@@ -62,21 +62,6 @@ public class AppConfig {
         return dataSource;
     }
 
-//    @Bean
-//    public JdbcTemplate jdbcTemplate(DataSource dataSource){
-//        return new JdbcTemplate(dataSource);
-//    }
-//
-//    @Bean
-//    public PlatformTransactionManager dataSourceTransactionManager(DataSource dataSource){
-//        return new DataSourceTransactionManager(dataSource);
-//    }
-//
-//    @Bean
-//    public TransactionTemplate transactionTemplate(PlatformTransactionManager dataSourceTransactionManager){
-//        return new TransactionTemplate(dataSourceTransactionManager);
-//    }
-
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
@@ -85,17 +70,6 @@ public class AppConfig {
                 new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/*.xml"));
         sessionFactory.setTypeAliasesPackage("org.eventum.sample.domain");
         return sessionFactory.getObject();
-    }
-
-//    @Bean
-//    public EventConsumer eventConsumer(OrderCreatedEventHandler orderCreatedEventHandler, PaymentEventHandler paymentEventHandler){
-//        EventConsumer eventConsumer = new EventConsumer();
-//        return eventConsumer.registerHandler(orderCreatedEventHandler).registerHandler(paymentEventHandler);
-//    }
-
-    @Bean
-    public EventStore eventStore(JdbcTemplate jdbcTemplate){
-        return new JdbcEventStore(jdbcTemplate);
     }
 
     @Bean
