@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.eventum.sample.repository.OrderRepository">
+
+    <insert id="create" parameterType="Order" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into
+        sample_orders (orderId,customerId, status,created_time, modified_time)
+        values(#{orderId}, #{customerId}, #{orderStatus}, now(), now())
+    </insert>
+
+    <select id="changeStatus">
+        update sample_orders set status=#{orderStatus} where orderId=#{orderId}
+    </select>
+
+    <select id="get" parameterType="String"
+            resultType="Order">
+        select * from sample_orders where orderId=#{orderId}
+    </select>
+
+</mapper>
